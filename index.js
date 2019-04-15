@@ -1,4 +1,4 @@
-import test, {drawPlayable} from "./lib/draw.js"
+import test, {drawPlayable,drawSquare} from "./lib/draw.js"
 
 console.log(test)
 
@@ -9,6 +9,7 @@ drawLoop()
 function drawLoop(){
   ctx.clearRect(0 , 0 , canvas.width, canvas.height);
   drawPlayable();
+  drawSquare();
   requestAnimationFrame(drawLoop)
 }
 
