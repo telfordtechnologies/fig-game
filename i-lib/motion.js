@@ -1,6 +1,7 @@
 import obj from "./objects.js";
-let { playable } = obj;
-let playerSpeed = 2
+import checkCollisions from "./collisions.js";
+
+let { playable , xombie } = obj;
 
 let right = false;
 let left = false;
@@ -12,31 +13,37 @@ let down = false;
 export function keydownHandler(e){
   if(e.key == "ArrowRight" && right === false){
     right = true;
-    playable.xm += playerSpeed;
+    playable.xm += playable.speed;
   };
   if(e.key == "ArrowLeft" && left === false){
     left = true;
-    playable.xm -= playerSpeed;
+    playable.xm -= playable.speed;
   };
   if(e.key == "ArrowUp" && up === false){
     up = true;
-    playable.ym -= playerSpeed;
+    playable.ym -= playable.speed;
   };
   if(e.key == "ArrowDown" && down === false){
     down = true;
-    playable.ym += playerSpeed;
+    playable.ym += playable.speed;
   };
 }
 
 export function keyupHandler(e){
-  if(e.key == "ArrowRight" && right === true){playable.xm -= playerSpeed; right = false}
-  if(e.key == "ArrowLeft" && left === true){playable.xm += playerSpeed; left = false}
-  if(e.key == "ArrowUp" && up === true){playable.ym += playerSpeed; up = false}
-  if(e.key == "ArrowDown" && down === true){playable.ym -= playerSpeed; down = false}
+  if(e.key == "ArrowRight" && right === true){playable.xm -= playable.speed; right = false}
+  if(e.key == "ArrowLeft" && left === true){playable.xm += playable.speed; left = false}
+  if(e.key == "ArrowUp" && up === true){playable.ym += playable.speed; up = false}
+  if(e.key == "ArrowDown" && down === true){playable.ym -= playable.speed; down = false}
 }
 
 export function movePlayer(){
   // console.log(playable)
+  if(checkCollisions(playable)){
+    left = false;
+    right = false;
+    up = false;
+    down = false;
+  }
   playable.x += playable.xm;
   playable.y += playable.ym;
 }

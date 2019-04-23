@@ -1,10 +1,13 @@
 import obj from "./objects.js";
-const { playable , xombie } = obj
+import checkCollision from "../i-lib/collisions.js";
+let { playable , xombie } = obj
 
 export default function moveXombie(){
   chasePlayer(xombie);
-  xombie.x += xombie.xm;
-  xombie.y += xombie.ym;
+  console.log(xombie)
+  checkCollision(xombie)
+  xombie.x += xombie.xm
+  xombie.y += xombie.ym
 }
 
 function chasePlayer(mobile){
