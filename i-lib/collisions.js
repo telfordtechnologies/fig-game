@@ -7,7 +7,7 @@ export default function checkCollision(mobile){
   return currentLevel.filter((obstacle) => {
     const {x , y , width , height} = obstacle;
     if(xPath > x && xPath < x + width && yPath > y && yPath < y + height){
-      console.log("Wall" , obstacle)
+      // console.log("Wall" , obstacle)
       if(obstacle.finish){loadLevel()}
       if(mobile.x > x && mobile.x < x + width){mobile.ym = 0}
       if(mobile.y > y && mobile.y < y + height){mobile.xm = 0}
