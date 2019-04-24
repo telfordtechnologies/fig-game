@@ -4,7 +4,7 @@ let { playable , xombie } = obj
 
 export default function moveXombie(){
   chasePlayer(xombie);
-  console.log(xombie)
+  // console.log(xombie)
   checkCollision(xombie)
   xombie.x += xombie.xm
   xombie.y += xombie.ym

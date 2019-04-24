@@ -28,10 +28,20 @@ class Obstacle{
   }
 }
 
-let wall = new Obstacle(200, 200, 10 , 100)
+class Finish extends Obstacle{
+  constructor(x , y){
+    super(x , y , 30 , 30)
+    this.finish = true
+    this.fillStyle = "Green"
+  }
+}
+
+// let wall = new Obstacle(200, 200, 10 , 400)
 
 export default {
   playable,
   xombie,
-  wall,
+  Obstacle,
+  Finish,
+  // wall,
 }
