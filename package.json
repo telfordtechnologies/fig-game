@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "begin": "node server.js"
+    "begin": "node multiplayerServer.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/telfordtechnologies/fig-game#readme",
   "dependencies": {
     "connect": "^3.6.6",
+    "express": "^4.16.4",
     "live-server": "^1.2.1",
     "serve-static": "^1.13.2"
   }
