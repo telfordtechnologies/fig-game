@@ -9,8 +9,8 @@ let playable = {
 }
 
 let xombie = {
-  x: 150,
-  y: 150,
+  x: 300,
+  y: 200,
   xm: 0,
   ym: 0,
   rad: 10,

@@ -1,5 +1,6 @@
 // import obj from './objects.js';
 import { currentLevel , loadLevel } from "./engine.js";
+import obj from "./objects.js";
 
 export default function checkCollision(mobile){
   const xPath = mobile.x + mobile.xm;
@@ -17,6 +18,15 @@ export default function checkCollision(mobile){
     }
     return false
   }).length
+}
+
+export function catchPlayer(){
+  const {xombie , playable} = obj
+  if(Math.abs(xombie.x - playable.x) < playable.rad + xombie.rad && Math.abs(xombie.y - playable.y) < playable.rad + xombie.rad){
+    return true
+  } else {
+    return false
+  }
 }
 
 // export default function checkCollision(mobile){
