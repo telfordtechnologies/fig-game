@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "begin": "node multiplayerServer.js"
+    "begin": "node ./socketTutorial/server.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,9 @@
     "connect": "^3.6.6",
     "express": "^4.16.4",
     "live-server": "^1.2.1",
-    "serve-static": "^1.13.2"
+    "serve-static": "^1.13.2",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "websocket": "^1.0.28"
   }
 }
