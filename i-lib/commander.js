@@ -6,6 +6,8 @@ function drawObj(obj){
       return drawCircle(obj);
     case "square":
       return drawSquare(obj);
+    case "level":
+      return drawLevel(obj.obstacles);
     default:
       return console.log("Could not draw:" , obj)
   }
@@ -20,7 +22,7 @@ function drawCircle(t){
 function drawSquare(t){
   ctx.beginPath();
   ctx.rect(t.x , t.y , t.width , t.height);
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = t.fillStyle ? t.fillStyle : "#fff";
   ctx.fill();
   ctx.stroke();
   ctx.closePath();
@@ -28,6 +30,13 @@ function drawSquare(t){
 
 function drawSVG(){
 
+}
+
+function drawLevel(a){
+  // console.log(a)
+  a.forEach(obstacle => {
+    drawSquare(obstacle);
+  })
 }
 
 export default drawObj

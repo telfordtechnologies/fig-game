@@ -39,6 +39,10 @@ export function keyupHandler(e){
 export function movePlayer(){
   // console.log(playable)
   if(checkCollisions(playable)){
+    // NOTE: had to add this bit because if xm and ym are not both reset, you can double speed by running into a wall.
+    playable.xm = 0;
+    playable.ym = 0;
+    //
     left = false;
     right = false;
     up = false;
