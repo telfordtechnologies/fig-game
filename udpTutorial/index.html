@@ -1,0 +1,28 @@
+<!-- from  https://www.hacksparrow.com/node-js-udp-server-and-client-example.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>UDP TUTORIAL</title>
+</head>
+<body>
+  
+  <script>
+    const PORT = 33333;
+    const HOST = '127.0.0.1';
+
+    const dgram = require('dgram');
+    const message = new Buffer("My KungFu is Good!");
+
+    const client = dgram.createSocket("udp4");
+    client.send(message, 0, message.length, PORT, HOST, (err , bytes) => {
+      if (err) throw err;
+      console.log(`UDP message sent to ${HOST} : ${PORT}`);
+      client.close();
+    });
+  </script>
+</body>
+</html>

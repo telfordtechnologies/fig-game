@@ -23,6 +23,7 @@
   "homepage": "https://github.com/telfordtechnologies/fig-game#readme",
   "dependencies": {
     "connect": "^3.6.6",
+    "dgram": "^1.0.1",
     "express": "^4.16.4",
     "live-server": "^1.2.1",
     "serve-static": "^1.13.2",
