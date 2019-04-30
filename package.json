@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "begin": "node ./socketTutorial/server.js"
+    "begin": "node ./multiplayer/multiplayerServer.js"
   },
   "repository": {
     "type": "git",

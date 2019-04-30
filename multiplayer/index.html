@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Multiplayer Test</title>
+</head>
+<body>
+  <h1></h1>
+  <h1></h1>
+  <button id="number-button">What number is the server on?</button>
+
+  <canvas id="playfield" width="900" height="600"></canvas>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module">
+
+    const h1Array = document.getElementsByTagName("h1");
+    const numberElement = h1Array[0];
+    const idElement = h1Array[1];
+    const socket = io.connect();
+    let id;
+    const canvas = document.getElementById("playfield");
+    const ctx = canvas.getContext("2d");
+    let playersArr = [];
+
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('number')
+    })
+    socket.on("ID ASSIGNMENT" , (data) => {
+      id= "player" + data.number
+      idElement.innerText = id
+      playersArr.push({id , x: 20 , y: 20})
+      socket.emit("update" , playersArr.find((player) => player.id === id))
+    })
+
+    // socket.on("number" , (data) => {
+    //   numberElement.innerText = data.number;
+    //   socket.emit("number")
+    // })
+
+    function draw(){
+      ctx.clearRect(0, 0, canvas.width , canvas.height);
+      ctx.beginPath();
+      ctx.rect(0, 0, canvas.width , canvas.height);
+      ctx.stroke();
+      ctx.closePath();
+      if(playersArr.length){
+        playersArr.forEach(player => {
+          ctx.beginPath();
+          ctx.arc(player.x , player.y , 10 , 0 , Math.PI*2);
+          ctx.stroke();
+        });
+      }
+      // console.log(playersArr)
+      requestAnimationFrame(draw)
+    };
+    draw();
+
+    
+
+function handleKeyDown(e){
+  let playable = playersArr.find((p) => {
+    return p.id === id
+  })
+  if(e.key == "ArrowRight"){
+    playable.x += 10;
+  };
+  if(e.key == "ArrowLeft"){
+    playable.x -= 10;
+  };
+  if(e.key == "ArrowUp"){
+    playable.y -= 10;
+  };
+  if(e.key == "ArrowDown"){
+    playable.y += 10;
+  };
+  console.log("KEYDOWN" , playable)
+}
+
+document.addEventListener("keydown" , handleKeyDown , false);
+// document.addEventListener("keyup" , handleKeyUp , false);
+    
+  </script>
+</body>
+</html>
