@@ -29,6 +29,7 @@ app.use(express.static(__dirname))
 setInterval(() => {
   serverNumber++
   // socket.emit("number" , {number: serverNumber})
+  console.log(serverNumber)
 }, 1000);
 
 // console.log("Creating Websocket Server...");
@@ -49,22 +50,25 @@ io.on("connection" , function (socket) {
   socket.on('my other event', function (data){
     console.log(data);
   });
-  socket.on("number" , function (data){
-    socket.emit("number" , {number: serverNumber})
-  });
+  // socket.on("number" , function (data){
+  //   socket.emit("number" , {number: serverNumber})
+  // });
   socket.on("update" , (data) => {
-    if(playersArr.indexOf((player) => {
-      return player.id === data.id
-    }) === -1){
-      playersArr.push(data)
-      console.log(playersArr)
-    }
-    else
-    {playersArr = playersArr.splice(playersArr.indexOf((player) => {
-      return player.id === data.id
-    }), 1 , data)
-    console.log(playersArr);
-  }})
+    // console.log("INBOUND: " , data)
+    // if(!playersArr.find((player) => {
+    //   return player.id === data.id
+    // })){
+    //   playersArr.push(data)
+    //   socket.emit("update" , playersArr)
+    //   console.log("pushed" , playersArr)
+    // }
+    // else
+    // {
+    // playersArr.find(p => p.id === "TEST").x = serverNumber
+    playersArr = [...playersArr.filter(p => p.id !== data.id) , data]
+    socket.emit("update" , playersArr);
+    // console.log("updated")
+  })
 });
 
 // var app = require('express')();

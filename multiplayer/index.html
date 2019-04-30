@@ -24,6 +24,7 @@
     const canvas = document.getElementById("playfield");
     const ctx = canvas.getContext("2d");
     let playersArr = [];
+    let playable;
 
     socket.on('news', function (data) {
       console.log(data);
@@ -32,8 +33,16 @@
     socket.on("ID ASSIGNMENT" , (data) => {
       id= "player" + data.number
       idElement.innerText = id
-      playersArr.push({id , x: 20 , y: 20})
-      socket.emit("update" , playersArr.find((player) => player.id === id))
+      playable = {id , x: 20 , y: 20}
+      playersArr.push(playable)
+      socket.emit("update" , playable)
+    });
+    socket.on("update" , (data) => {
+      // console.log(data)
+      // playersArr = data.filter(p => p.id !== id).push(playable)
+      playersArr = [...data]
+      // console.log(playable)
+      socket.emit("update" , playable)
     })
 
     // socket.on("number" , (data) => {
@@ -49,6 +58,7 @@
       ctx.closePath();
       if(playersArr.length){
         playersArr.forEach(player => {
+          // console.log("Drawing " , player.id)
           ctx.beginPath();
           ctx.arc(player.x , player.y , 10 , 0 , Math.PI*2);
           ctx.stroke();
@@ -62,9 +72,6 @@
     
 
 function handleKeyDown(e){
-  let playable = playersArr.find((p) => {
-    return p.id === id
-  })
   if(e.key == "ArrowRight"){
     playable.x += 10;
   };
@@ -77,7 +84,7 @@ function handleKeyDown(e){
   if(e.key == "ArrowDown"){
     playable.y += 10;
   };
-  console.log("KEYDOWN" , playable)
+  // console.log("KEYDOWN" , playable)
 }
 
 document.addEventListener("keydown" , handleKeyDown , false);
