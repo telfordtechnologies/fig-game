@@ -7,29 +7,25 @@
   <title>Multiplayer Test</title>
 </head>
 <body>
-  <h1></h1>
-  <h1></h1>
-  <button id="number-button">What number is the server on?</button>
+  <h1></h1> <!-- This will store the player id string -->
 
-  <canvas id="playfield" width="900" height="600"></canvas>
+  <canvas id="playfield" width="900" height="600"></canvas> 
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script type="module">
+  <script src="/socket.io/socket.io.js"></script> 
+  <script type="module"> // "Module" just in case I wanted to import stuff
 
+    // Setting up the playing field
     const h1Array = document.getElementsByTagName("h1");
-    const numberElement = h1Array[0];
-    const idElement = h1Array[1];
-    const socket = io.connect();
-    let id;
+    const idElement = h1Array[0];
     const canvas = document.getElementById("playfield");
     const ctx = canvas.getContext("2d");
-    let playersArr = [];
-    let playable;
 
-    socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('number')
-    })
+    const socket = io.connect(); // Working theory is this is where we connect
+
+    let playersArr = []; // We'll get this from the back end.
+    let id;
+    let playable;
+    
     socket.on("ID ASSIGNMENT" , (data) => {
       id= "player" + data.number
       idElement.innerText = id
