@@ -38,17 +38,10 @@
       socket.emit("update" , playable)
     });
     socket.on("update" , (data) => {
-      // console.log(data)
-      // playersArr = data.filter(p => p.id !== id).push(playable)
       playersArr = [...data]
-      // console.log(playable)
       socket.emit("update" , playable)
     })
 
-    // socket.on("number" , (data) => {
-    //   numberElement.innerText = data.number;
-    //   socket.emit("number")
-    // })
 
     function draw(){
       ctx.clearRect(0, 0, canvas.width , canvas.height);
@@ -58,13 +51,11 @@
       ctx.closePath();
       if(playersArr.length){
         playersArr.forEach(player => {
-          // console.log("Drawing " , player.id)
           ctx.beginPath();
           ctx.arc(player.x , player.y , 10 , 0 , Math.PI*2);
           ctx.stroke();
         });
       }
-      // console.log(playersArr)
       requestAnimationFrame(draw)
     };
     draw();
@@ -84,11 +75,9 @@ function handleKeyDown(e){
   if(e.key == "ArrowDown"){
     playable.y += 10;
   };
-  // console.log("KEYDOWN" , playable)
 }
 
 document.addEventListener("keydown" , handleKeyDown , false);
-// document.addEventListener("keyup" , handleKeyUp , false);
     
   </script>
 </body>
