@@ -10,9 +10,19 @@
 </head>
 <body>
 
+<div id="testyboi"></div>
+
 <canvas id="myCanvas" width="480" height="320"></canvas>
 
 <script>
+  const testyboi = document.getElementById("testyboi");
+  testyboi.innerText = "Heyo!"
+  testyboi.innerHTML = "<p> If you can see this, it worked!</p>"
+  const ptag = document.getElementsByTagName("p")[0]
+  ptag.innerText = "What you know?"
+  
+  
+  
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
   var ballRadius = 10;
